@@ -8,7 +8,7 @@ let dep = [
   { id: 7, label: '大杨乡人民政府', pid: 4 }
 ]
 /**
- *@description 将平行数据按照pid进行归类出来
+ * @description 将平行数据按照pid进行归类出来
  * @param {Array} list
  * @param {string|Number} node
  */
