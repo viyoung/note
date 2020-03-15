@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    img {
+      display: block;
+    }
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    * {
+      box-sizing: border-box;
+    }
+  </style>
+  <body>
+    <div id="picList">
+      <img
+        src="./image/loading.jpg"
+        alt=""
+        data-src="https://t7.baidu.com/it/u=378254553,3884800361&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1584852523&t=9e0acf70a49bd4f11c073e02c44159d2"
+      />
+      <img
+        src="./image/loading.jpg"
+        alt=""
+        data-src="https://t8.baidu.com/it/u=3571592872,3353494284&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1584852523&t=38417cccb2bf0b6007eeb8fa2946f270"
+      />
+      <img
+        src="./image/loading.jpg"
+        alt=""
+        data-src="https://t7.baidu.com/it/u=3616242789,1098670747&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1584852523&t=69af73eb163d18a749a71acd760d7b8a"
+      />
+      <img
+        src="./image/loading.jpg"
+        alt=""
+        data-src="https://t8.baidu.com/it/u=1484500186,1503043093&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1584852523&t=3760050150071e88679be57e62425bc7"
+      />
+      <img
+        src="./image/loading.jpg"
+        alt=""
+        data-src="https://t8.baidu.com/it/u=2247852322,986532796&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1584852523&t=68e8a59da2f4092c134f879222156d6c"
+      />
+      <img
+        src="./image/loading.jpg"
+        alt=""
+        data-src="https://t7.baidu.com/it/u=3204887199,3790688592&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1584852523&t=2859d38bd3cdcebc88f0308a87e9e4c7"
+      />
+      <img
+        src="./image/loading.jpg"
+        alt=""
+        data-src="https://t9.baidu.com/it/u=3363001160,1163944807&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1584852523&t=e87567d2999fb7a2dff1550a1994121d"
+      />
+      <img
+        src="./image/loading.jpg"
+        alt=""
+        data-src="https://t9.baidu.com/it/u=583874135,70653437&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1584852523&t=b6f271498775015121ce00b90d95bd9a"
+      />
+      <img
+        src="./image/loading.jpg"
+        alt=""
+        data-src="https://t9.baidu.com/it/u=1307125826,3433407105&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1584852523&t=9212c1c67c856bc347dd21e01f932962"
+      />
+      <img
+        src="./image/loading.jpg"
+        alt=""
+        data-src="https://t7.baidu.com/it/u=422362611,2700604841&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1584857385&t=99677f67efb8e7a80bc6e612facce93b"
+      />
+      <img
+        src="./image/loading.jpg"
+        alt=""
+        data-src="https://t8.baidu.com/it/u=3064799386,2095288843&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1584857385&t=e7d967067c04234350ddf0b5262d9bf6"
+      />
+      <img
+        src="./image/loading.jpg"
+        alt=""
+        data-src="https://t7.baidu.com/it/u=2704272957,1194893808&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1584857385&t=d53dbff7af428615ed6bec14fa73722d"
+      />
+    </div>
+  </body>
+  <script>
+    window.onload = function() {
+      let imgs = document.querySelectorAll('#picList img')
+      let getTop = function(e) {
+        return e.offsetTop
+      }
+      let lazyLoadImg = function(picList) {
+        let height = window.innerHeight
+        let scollHeight =
+          document.documentElement.scrollTop || document.body.scrollTop
+        let loadProimise = function(path) {
+          return new Promise((resolve, reject) => {
+            let image = new Image()
+            image.src = path
+            image.onload = function() {
+              resolve()
+            }
+            image.onerror = function() {
+              reject('图片加载失败')
+            }
+          })
+        }
+        for (let i = 0; i < picList.length; i++) {
+          if (height + scollHeight > getTop(picList[i])) {
+            let path = picList[i].getAttribute('data-src')
+            console.log(path)
+            loadProimise(path)
+              .then(() => {
+                picList[i].src = path
+              })
+              .catch(err => {
+                console.log(err)
+              })
+          }
+        }
+      }
+      lazyLoadImg(imgs)
+      window.onscroll = function() {
+        lazyLoadImg(imgs)
+      }
+    }
+  </script>
+</html>
