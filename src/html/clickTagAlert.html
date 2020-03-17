@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="test">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+  </body>
+  <script>
+    ;(function() {
+      let liTage = document.getElementById('test').childNodes
+      let liTageLen = liTage.length
+      for (let i = 0; i < liTageLen; i++) {
+        if (liTage[i].nodeName.toLowerCase() === 'li') {
+          liTage[i].addEventListener('click', function() {
+            alert(liTage[i].innerText)
+          })
+        }
+      }
+    })()
+  </script>
+</html>
