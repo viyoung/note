@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      border: 1px solid #ddd;
+      margin: 0;
+    }
+    .box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -100px;
+      margin-left: -100px;
+      /* top: 0;
+      left: 0;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: auto; */
+      /* position: absolute;
+      top: calc(50% - 100px);
+      left: calc(50% - 100px); */
+    }
+    .size {
+      height: 200px;
+      width: 200px;
+      background-color: aquamarine;
+    }
+  </style>
+  <body>
+    <!-- 子元素已知宽度的三种方式居中 1、position+负margin 2、position+margin auto 3、position+calc(50%-itemWidth/2) -->
+    <div class="box size">123</div>
+  </body>
+</html>

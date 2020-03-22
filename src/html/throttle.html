@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>throttle</title>
+  </head>
+  <body>
+    <style>
+      #wap p {
+        height: 300px;
+        width: 100%;
+        background-color: #ddd;
+        font-size: 40px;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        line-height: 300px;
+      }
+    </style>
+    <body>
+      <div id="wap">
+        <p>0</p>
+      </div>
+    </body>
+    <script>
+      /**
+       *@desc 节流函数：当持续触发事件时，保证隔间时间触发一次事件
+       *@param{Function} fn 执行函数
+       *@param{Number} wait 延迟时间
+       *@param {Number} type 1 表时间戳版，2 表定时器版
+       */
+      function throttle(fn, wait, type) {
+        let timer = '',previous='';
+        if(type===1){
+          previous=0;
+        }else if(type===2){
+          timer=null
+        }else{
+         throw(new Error(`expect type is 1 or 2,but got ${type} `))
+        }
+        return function(){
+          let context = this, args = arguments;
+          if(type===1){
+            let now=Date.now();
+            if(now-previous>wait){
+              fn.apply(context,args)
+              previous=now;
+            }
+          }else if(type===2){
+             if(!timer){
+              timer=setTimeout(()=>{
+              timer=null;
+                fn.apply(context,args)
+             },wait)
+             }
+          }
+        }
+      } 
+      let dom = document.getElementById('wap')
+      let domHandle = function(e) {
+        e.target.innerText = Number(e.target.innerText || 0) + 1
+      }
+      dom.addEventListener('mouseover', throttle(domHandle, 1000, 1))
+    </script>
+</html>
