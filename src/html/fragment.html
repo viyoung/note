@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragment</title>
+  </head>
+  <body>
+    <ul id="wrp"></ul>
+  </body>
+  <script>
+    let indxHtml = {
+      //不停的操作DOM，使用fragment作为容器包裹；
+      appendHtml(arr, id) {
+        let dom = document.querySelector(id)
+        let fragment = document.createDocumentFragment()
+        let createLi = ''
+        for (let i = 0; i < arr.length; i++) {
+          createLi = document.createElement('li')
+          createLi.innerHTML = arr[i]
+          fragment.appendChild(createLi)
+        }
+        dom.appendChild(fragment)
+      },
+      init(item, id) {
+        this.appendHtml(item, id)
+      }
+    }
+    indxHtml.init([1, 2, 3], '#wrp')
+  </script>
+</html>
