@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>流式布局</title>
+  </head>
+  <style>
+    html,
+    body {
+      margin: 0;
+      background-color: #ddd;
+    }
+    .left {
+      width: 200px;
+      float: left;
+      background-color: blue;
+      height: 500px;
+    }
+    .right {
+      width: 200px;
+      float: right;
+      background-color: red;
+      height: 500px;
+    }
+    .main {
+      margin-left: 210px;
+      margin-right: 210px;
+      height: 500px;
+      background-color: chartreuse;
+    }
+    .container::after {
+      content: '';
+      display: block;
+      clear: both;
+      overflow: hidden;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="main"></div>
+    </div>
+  </body>
+</html>
