@@ -13,7 +13,7 @@ function noReapeat(arr) {
 }
 console.log(noReapeat([1, 4, 6, 'he', 2, 6, 7, 'he']))
 /**
- *@description Use Sets
+ *@description Use Set
  * @param {Array} arr
  */
 
