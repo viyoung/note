@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>drag</title>
+  </head>
+  <style>
+    body {
+      display: flex;
+    }
+    #originCon {
+      width: 400px;
+      height: 300px;
+      border: 1px solid red;
+    }
+    .target {
+      cursor: move;
+      border: 1px solid #ddd;
+      padding: 5px;
+    }
+    #targetCon {
+      width: 400px;
+      height: 300px;
+      border: 1px solid green;
+    }
+  </style>
+  <body>
+    <div id="originCon">
+      <div class="target" draggable="true">
+        <p>我是公仔图片</p>
+        <img src="./image/gongzai.jpeg" alt="这是QQ公仔" />
+      </div>
+    </div>
+    <div id="targetCon"></div>
+  </body>
+  <script>
+    let orignObj = document.querySelector("#originCon .target");
+    let targetObj = document.querySelector("#targetCon");
+    let originCon = document.querySelector("#originCon");
+
+    //原始拖动对象的事件注册
+    orignObj.ondragstart = handle_start;
+    orignObj.ondrag = handle_drag;
+    orignObj.ondragend = handle_end;
+
+    originCon.ondragenter = handle_enter;
+    originCon.ondragover = handle_over;
+    originCon.ondragleave = handle_leave;
+    originCon.ondrop = handle_drop;
+
+    //目标对象的事件注册
+    targetObj.ondragenter = handle_enter;
+    targetObj.ondragover = handle_over;
+    targetObj.ondragleave = handle_leave;
+    targetObj.ondrop = handle_drop;
+
+    targetObj.ondragstart = handle_start;
+    targetObj.ondrag = handle_drag;
+    targetObj.ondragend = handle_end;
+
+    function handle_start(e) {
+      console.log("拖动开始");
+    }
+    function handle_drag(e) {
+      console.log("拖动中");
+    }
+    function handle_end(e) {
+      console.log("拖动结束");
+    }
+    function handle_enter(e) {
+      console.log("进入目标框中了");
+      e.preventDefault();
+    }
+    function handle_over(e) {
+      console.log("进入目标位置中了");
+      e.preventDefault();
+    }
+    function handle_leave(e) {
+      console.log("离开目标位置了");
+      e.preventDefault();
+    }
+    function handle_drop(e) {
+      console.log("在目标位置放置了");
+      e.target.innnerHTML = "";
+      e.target.append(orignObj);
+      e.preventDefault();
+    }
+  </script>
+</html>
